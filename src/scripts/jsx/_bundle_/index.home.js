@@ -1,4 +1,7 @@
-import HomeComp from '../home/HomeComp';
+import NavComp from '../home/NavComp';
+import TopComp from '../home/TopComp';
+import ListComp from '../home/ListComp';
+import RightComp from '../home/RightComp';
 
 var Main = {
 	Data: {
@@ -8,8 +11,10 @@ var Main = {
 		this.Data.name = "Nguyen Duc Duyen";
 	},
 	Render: function () {
-		const app = document.getElementById('page-content');
-		ReactDOM.render(<HomeComp Data={this.Data}/>, app);
+		ReactDOM.render(<NavComp />, document.getElementById('nav_comp'));
+		ReactDOM.render(<TopComp />, document.getElementById('top_comp'));
+		ReactDOM.render(<ListComp />, document.getElementById('list_comp'));
+		ReactDOM.render(<RightComp />, document.getElementById('right_comp'));
 	}
 }
 
