@@ -2,16 +2,13 @@ var homePage = (function () {
 
     return {
         run: function () {
-            // init dispatcher page
-            var dispatcherPage = new mFlux.MDispatcher();
 
-            // store menu top
-            var storeMenuTop = new mFlux.MStore();
-            storeMenuTop.actionType = __ActionType.Home.Add;
-            window.Store_MenuTop = storeMenuTop;
+            // define actions
+            window.Action_AddToCat = new mFlux.MAction(__ActionType.Home.AddToCart);
             
-            // register store
-            dispatcherPage.registerStore(storeMenuTop);
+            // register list actions
+            var dispatcherPage = new mFlux.MDispatcher();
+            dispatcherPage.registerAction(window.Action_AddToCat);
             window.DispatcherPage = dispatcherPage;
         }
     }

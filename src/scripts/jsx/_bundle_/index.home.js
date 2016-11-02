@@ -2,6 +2,7 @@ import NavComp from '../home/NavComp';
 import TopComp from '../home/TopComp';
 import ListComp from '../home/ListComp';
 import RightComp from '../home/RightComp';
+import CartComp from '../home/CartComp';
 
 var Main = {
 	Data: {
@@ -15,6 +16,7 @@ var Main = {
 		ReactDOM.render(<TopComp />, document.getElementById('top_comp'));
 		ReactDOM.render(<ListComp />, document.getElementById('list_comp'));
 		ReactDOM.render(<RightComp />, document.getElementById('right_comp'));
+		ReactDOM.render(<CartComp />, document.getElementById('cart_comp'));
 	}
 }
 

@@ -10,6 +10,15 @@ class ProductDetailComp extends Component {
 		this.props.FuncClose(this.props.ModalComp);
 	}
 
+	addToCart(productItem){
+		var action = new mFlux.MAction(__ActionType.Home.AddToCart);
+        action.setParam(productItem);
+        window.DispatcherPage.dispatchAction(action);
+
+        //Close Modal
+        this.closeModel();
+	}
+
 	render() {
 		let item = this.props.Item;
 		return (
@@ -19,7 +28,11 @@ class ProductDetailComp extends Component {
               	<p>{item.Price}</p>
               	<p>{item.ProductDesc}</p>
               	<hr/>
-              	<p><a className="btn btn-secondary" onClick={this.closeModel.bind(this)}>Close</a></p>
+              	<p>
+              		<a className="btn btn-secondary" onClick={this.closeModel.bind(this)}>Close</a>
+              		&nbsp;&nbsp;
+              		<a className="btn btn-primary" onClick={this.addToCart.bind(this, item)}>Add To Cart</a>
+              	</p>
           	</div>
 		);
 	}

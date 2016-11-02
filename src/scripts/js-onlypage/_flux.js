@@ -1,4 +1,7 @@
-
+// StoreCommon = window
+// List Actions
+// List Views
+// Dispatcher = list (Action, View)
 var mFlux;
 (function (mFlux) {
 
@@ -6,7 +9,16 @@ var mFlux;
         function MAction() {
             this._type = 0;
             this._param = null;
+            this._listView = new Array();
         }
+
+        function MAction(type) {
+            this._type = type;
+            this._param = null;
+            this._listView = new Array();
+        }
+
+        //Info action
         MAction.prototype.getType = function () {
             return this._type;
         };
@@ -19,54 +31,49 @@ var mFlux;
         MAction.prototype.setParam = function (value) {
             this._param = value;
         };
-        return MAction;
-    }());
-    mFlux.MAction = MAction;
+        MAction.prototype.setAction = function (type, param) {
+            this._type = type;
+            this._param = param;
+        };
 
-    var MStore = (function () {
-        function MStore() {
-            this._listView = new Array();
-            this.actionType = 0;
-            this.actionParam = null;
-        }
-
-        MStore.prototype.registerView = function (view) {
+        //Info list views
+        MAction.prototype.registerView = function (view) {
 
             this._listView.push(view);
         };
-        MStore.prototype.unRegisterView = function (view) {
+        MAction.prototype.unRegisterView = function (view) {
             for (var i = this._listView.length - 1; i >= 0; --i) {
                 if (this._listView[i] === view) {
                     this._listView.splice(i, 1);
                 }
             }
         };
-        MStore.prototype.notifyChange = function () {
+
+        //Notify to list views
+        MAction.prototype.NotifyToListViews = function (action) {
             var _this = this;
-            this._listView.forEach(function (item) {
-                item.storeChanged(_this);
-            });
-        };
-        MStore.prototype.onAction = function (action) {
-            if (action.getType() === this.actionType) {
-                this.actionParam = action.getParam();
-                this.notifyChange();
+            if (_this._type === action.getType()) {
+                _this._param = action.getParam();
+                //Notify changed list views
+                _this._listView.forEach(function (item) {
+                    item.actionChanged(_this);
+                });
             }
         };
-        return MStore;
+        return MAction;
     }());
-    mFlux.MStore = MStore;
+    mFlux.MAction = MAction;
 
     var MDispatcher = (function () {
         function MDispatcher() {
-            this._listStore = new Array();
+            this._listAction = new Array();
         }
-        MDispatcher.prototype.registerStore = function (store) {
-            this._listStore.push(store);
+        MDispatcher.prototype.registerAction = function (action) {
+            this._listAction.push(action);
         };
         MDispatcher.prototype.dispatchAction = function (action) {
-            this._listStore.forEach(function (store) {
-                store.onAction(action);
+            this._listAction.forEach(function (item) {
+                item.NotifyToListViews(action);
             });
         };
         return MDispatcher;
