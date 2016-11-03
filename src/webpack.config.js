@@ -20,11 +20,15 @@ var config = {
                 query: {
                     presets: ['es2015', 'stage-0', 'react']
                 }
+            },
+            {
+              test: /(\.css|\.styl|\.less)$/,
+              loader: 'style-loader!css-loader!stylus-loader!less-loader'
             }
         ]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['', '.js', '.jsx', '.css', '.styl', '.less'],
         alias: {
             react: path.resolve(__dirname, 'node_modules', 'react'),
             'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom')

@@ -4,6 +4,8 @@ import Knight from './Knight';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
+import './Board.less';
+
 class Board extends Component {
   static propTypes = {
     knightPosition: PropTypes.arrayOf(
