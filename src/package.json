@@ -24,6 +24,8 @@
     "eslint": "3.3.1",
     "eslint-plugin-react": "6.1.2",
     "expose-loader": "0.7.1",
+    "faker": "^3.1.0",
+    "lodash": "^4.16.6",
     "moment": "^2.14.1",
     "react-bootstrap": "0.30.2",
     "react-datepicker": "^0.29.0",
