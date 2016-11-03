@@ -12,7 +12,7 @@ var Main = {
 		ReactDOM.render(<NavComp />, document.getElementById('nav_comp'));
 		ReactDOM.render(
 			<div>
-				<Board knightPosition={[0, 0]} />
+				<Board knightPosition={[1, 7]} />
 			</div>
 			,document.getElementById('body_comp'));
 	}
