@@ -269,6 +269,10 @@
 
 	var _ProductDetailComp2 = _interopRequireDefault(_ProductDetailComp);
 
+	var _publisher = __webpack_require__(276);
+
+	var _publisher2 = _interopRequireDefault(_publisher);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -300,6 +304,11 @@
 				var divContent = _react2.default.createElement(_ProductDetailComp2.default, { Item: productItem, ModalComp: this, FuncClose: this.onClick_CloseDetails });
 				this.ModalComp.setContent(divTitle, divContent);
 				this.ModalComp.openModal();
+			}
+		}, {
+			key: 'addToCart',
+			value: function addToCart(productItem) {
+				_publisher2.default.publish('Action_AddToCat', productItem);
 			}
 		}, {
 			key: 'render',
@@ -339,7 +348,13 @@
 									_react2.default.createElement(
 										'a',
 										{ className: 'btn btn-secondary', onClick: _this.onClick_ShowDetails.bind(_this, item) },
-										'View details \xBB'
+										'View \xBB'
+									),
+									'\xA0',
+									_react2.default.createElement(
+										'a',
+										{ className: 'btn btn-primary', onClick: _this.addToCart.bind(_this, item) },
+										'Add To Cart'
 									)
 								)
 							);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as data from '../../js/product';
 import ModalComp from '../common/ModalComp';
 import ProductDetailComp from './_ProductDetailComp';
+import publisher from 'publisher';
 
 class ListProduct extends Component {
 
@@ -18,7 +19,11 @@ class ListProduct extends Component {
         );
         this.ModalComp.setContent(divTitle, divContent);
         this.ModalComp.openModal();
-    }
+	}
+
+	addToCart(productItem){
+		publisher.publish('Action_AddToCat', productItem);
+	}
 
 	render() {
 		let _this = this;
@@ -33,7 +38,11 @@ class ListProduct extends Component {
 					              	<img src={item.ImageUrl} width={60} height={80}/>
 					              	<p>{item.Price}</p>
 					              	<p>{item.ProductDesc}</p>
-					              	<p><a className="btn btn-secondary" onClick={_this.onClick_ShowDetails.bind(_this, item)}>View details &raquo;</a></p>
+					              	<p>
+										  <a className="btn btn-secondary" onClick={_this.onClick_ShowDetails.bind(_this, item)}>View &raquo;</a>
+										  &nbsp;
+              							  <a className="btn btn-primary" onClick={_this.addToCart.bind(_this, item)}>Add To Cart</a>
+									</p>
 					            </div>							
 							);
 						})
