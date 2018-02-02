@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import publisher from 'publisher';
 
 class ProductDetailComp extends Component {
 
@@ -11,9 +12,8 @@ class ProductDetailComp extends Component {
 	}
 
 	addToCart(productItem){
-		var action = new mFlux.MAction(__ActionType.Home.AddToCart);
-        action.setParam(productItem);
-        window.DispatcherPage.dispatchAction(action);
+		
+		publisher.publish('Action_AddToCat', productItem);
 
         //Close Modal
         this.closeModel();

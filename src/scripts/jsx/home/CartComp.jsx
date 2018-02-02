@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import publisher from 'publisher';
 
 class CartComp extends Component {
 
@@ -9,27 +10,16 @@ class CartComp extends Component {
         };
 	}
 
-	componentDidMount() {
-        window.Action_AddToCat.registerView(this);
-    }
-
-    componentDidUpdate() {
-    }
-
-    componentWillUnmount() {
-        window.Action_AddToCat.unRegisterView(this);
-    }
-
-    actionChanged(action) {
-        if (action.getType() === __ActionType.Home.AddToCart) {
-            
-            var productItem = action.getParam();
+	componentDidMount() {  
+        let _this = this;
+        publisher.subscribe('Action_AddToCat', function (productItem) {
+            //Noi dung
             if(productItem != null && productItem.ProductId > 0){
-                this.setState({
-                    QtyProduct: this.state.QtyProduct + 1
+                _this.setState({
+                    QtyProduct: _this.state.QtyProduct + 1
                 });
-            }            
-        }
+            }
+        });
     }
 
 	render() {

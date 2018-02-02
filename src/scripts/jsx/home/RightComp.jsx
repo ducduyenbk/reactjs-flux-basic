@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import publisher from 'publisher';
 
 class RightComp extends Component {
 	constructor(props) {
@@ -9,24 +10,15 @@ class RightComp extends Component {
 	}
 
 	componentDidMount() {
-        window.Action_AddToCat.registerView(this);
-    }
-
-    componentDidUpdate() {
-    }
-
-    componentWillUnmount() {
-        window.Action_AddToCat.unRegisterView(this);
-    }
-
-    actionChanged(action) {
-        if (action.getType() === __ActionType.Home.AddToCart) {
-            
-            var productItem = action.getParam();
-            this.setState({
-                ShoppingCart: this.addToCart(productItem)
-            });
-        }
+        let _this = this;
+        publisher.subscribe('Action_AddToCat', function (productItem) {
+            //Noi dung
+            if(productItem != null && productItem.ProductId > 0){
+                _this.setState({
+                    ShoppingCart: _this.addToCart(productItem)
+                });
+            }
+        });
     }
 
     addToCart(productItem){
